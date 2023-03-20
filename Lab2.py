@@ -26,7 +26,7 @@ def load_cloud(file_name):
 x, y, z = load_cloud('wallCloud.xyz')
 
 plt.figure()
-plt.scatter(y, z)
+plt.scatter(x, y)
 plt.show()
 
 # znaleźć rozłączne chmury punktów za pomocą algorytmów k-średnich dla k=3
