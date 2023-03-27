@@ -4,8 +4,6 @@ import csv
 from sklearn.cluster import KMeans
 from scipy.stats import norm
 
-# wczytać poprzednio wygenerowane pliki z płaszczyzną punktów
-
 
 def read_csv(file_name):                     # read data from csv
     with open(file_name, newline='') as csvfile:
@@ -29,27 +27,26 @@ def load_clouds():
     return clouds
 
 
-clouds = load_clouds()
-x, y, z = zip(*clouds)
+clouds = load_clouds()  # load previously generated point plane files
+x, y, z = zip(*clouds)  # unzip 3 axis variables from clouds
 
-plt.figure()
+plt.figure()    # plot clouds
 ax = plt.axes(projection='3d')
 ax.scatter3D(x, y, z)
 plt.show()
 
-# znaleźć rozłączne chmury punktów za pomocą algorytmów k-średnich dla k=3
+# find disjoint point clouds using k-means algorithms for k=3
 X = np.array(clouds)
-print(len(clouds))
-print(len(X))
-clusterer = KMeans(n_init=10, n_clusters=3)        # utworzenie obiektu klasteryzatora
-clusterer.fit(X)                    # przekazanie danych do klasteryzatora
-y_pred = clusterer.predict(X)       # przewidzenie etykiety dla chmury punktów
+clusterer = KMeans(n_init=10, n_clusters=3)        # create clusterizer object
+clusterer.fit(X)                                   # passing data to clusterizer
+predicted_index = clusterer.predict(X)             # predicting a label for a cloud of points
 
-red = y_pred == 0       # oznaczanie kolorów 13 min
-blue = y_pred == 1
-green = y_pred == 2
+red = predicted_index == 0       # translation of cluster index to color
+blue = predicted_index == 1
+green = predicted_index == 2
 
-plt.figure()
+plt.figure()    # plot the results
+plt.title('Results of K-mean')
 ax = plt.axes(projection='3d')
 ax.scatter3D(X[red, 0], X[red, 1], X[red, 2], color="red")
 ax.scatter3D(X[blue, 0], X[blue, 1], X[blue, 2], color="blue")
