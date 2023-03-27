@@ -23,7 +23,7 @@ def create_surface_cloud(number_of_points=2000, x1=0, x2=1, y1=0, y2=1, z1=0, z2
     return points
 
 
-def create_cylinder_cloud(number_of_points=2000, radius=3, height = 5, x_center=0, y_center=0, noise=0.05):
+def create_cylinder_cloud(number_of_points=2000, radius=3, height=5, x_center=0, y_center=0, noise=0.05):
     x, y, z = [], [], []
 
     for i in range(number_of_points):
@@ -38,10 +38,10 @@ def create_cylinder_cloud(number_of_points=2000, radius=3, height = 5, x_center=
 
 
 if __name__ == '__main__':
-    cloud = create_surface_cloud(2000, x1=-5, x2=-10, y1=0, y2=10, z1=0, z2=0.05)
+    cloud = create_surface_cloud(1000, x1=-5, x2=-10, y1=0, y2=10, z1=0, z2=0.05)
     write_csv(cloud, 'floorCloud.xyz')
-    cloud = create_surface_cloud(2000, x1=0, x2=0.05, y1=5, y2=8, z1=0, z2=10)
+    cloud = create_surface_cloud(1000, x1=0, x2=0.05, y1=5, y2=8, z1=0, z2=10)
     write_csv(cloud, 'wallCloud.xyz')
-    cloud = create_cylinder_cloud()
+    cloud = create_cylinder_cloud(1000)
     write_csv(cloud, 'cylinderCloud.xyz')
     print('done')
