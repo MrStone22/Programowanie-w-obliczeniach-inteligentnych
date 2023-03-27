@@ -8,8 +8,8 @@ from scipy.stats import norm
 def read_csv(file_name):                     # read data from csv
     with open(file_name, newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
-        for x, y, z in reader:
-            yield float(x), float(y), float(z)  # returns a line of the csv file as a tuple
+        for x_csv, y_csv, z_csv in reader:
+            yield float(x_csv), float(y_csv), float(z_csv)  # returns a line of the csv file as a tuple
 
 
 def load_cloud(file_name):
@@ -20,11 +20,11 @@ def load_cloud(file_name):
 
 
 def load_clouds():
-    clouds = []
-    clouds.extend(load_cloud('floorCloud.xyz'))
-    clouds.extend(load_cloud('wallCloud.xyz'))
-    clouds.extend(load_cloud('cylinderCloud.xyz'))
-    return clouds
+    clouds_from_csv = []
+    clouds_from_csv.extend(load_cloud('floorCloud.xyz'))
+    clouds_from_csv.extend(load_cloud('wallCloud.xyz'))
+    clouds_from_csv.extend(load_cloud('cylinderCloud.xyz'))
+    return clouds_from_csv
 
 
 clouds = load_clouds()  # load previously generated point plane files
