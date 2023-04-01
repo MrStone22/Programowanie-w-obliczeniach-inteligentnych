@@ -38,10 +38,10 @@ def create_cylinder_cloud(number_of_points=2000, radius=3, height=5, x_center=0,
 
 
 if __name__ == '__main__':
-    cloud = create_surface_cloud(1000, x1=-5, x2=-10, y1=0, y2=10, z1=0, z2=0.05)
+    cloud = create_surface_cloud(200, x1=-30, x2=-40, y1=0, y2=10, z1=0, z2=0.01)
     write_csv(cloud, 'floorCloud.xyz')
-    cloud = create_surface_cloud(1000, x1=0, x2=0.05, y1=5, y2=8, z1=0, z2=10)
+    cloud = create_surface_cloud(200, x1=0, x2=0.01, y1=30, y2=40, z1=0, z2=10)
     write_csv(cloud, 'wallCloud.xyz')
-    cloud = create_cylinder_cloud(1000)
+    cloud = create_cylinder_cloud(200)
     write_csv(cloud, 'cylinderCloud.xyz')
     print('done')
