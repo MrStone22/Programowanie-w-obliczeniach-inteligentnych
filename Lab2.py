@@ -192,7 +192,7 @@ eq1 = best_eq1[0] * mesh_x + best_eq1[1] * mesh_y + best_eq1[2] + best_eq1[3]   
 
 plane2 = pyrsc.Plane()
 best_eq2, best_inliers2 = plane2.fit(cloud2, thresh=0.05, minPoints=100, maxIteration=1000)
-eq2 = best_eq2[0] * mesh_x + best_eq2[1] * mesh_y + best_eq2[2] + best_eq2[3]    # create plane equation
+eq2 = best_eq2[0] * mesh_x + best_eq2[1] * mesh_y + best_eq2[2] + best_eq2[3]    # create plane equation # TODO: wektor - brakuje przesunięcia od środka
 
 plane3 = pyrsc.Plane()
 best_eq3, best_inliers3 = plane3.fit(cloud3, thresh=0.05, minPoints=100, maxIteration=1000)
