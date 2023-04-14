@@ -23,16 +23,16 @@ for texture_folder in os.listdir(textures_dir_name):                        # li
         glcm = graycomatrix(sample_gray_array, distances=pixel_distances, angles=angles, levels=64, symmetric=True)
 
         # create dictionary with calculated dissimilarity, correlation, contrast, energy, homogeneity, ASM
-        new_row = {'category': texture_folder,
+        new_row = pd.Series({'category': texture_folder,
                    'dissimilarity': graycoprops(glcm, 'dissimilarity'),
                    'correlation': graycoprops(glcm, 'correlation'),
                    'contrast': graycoprops(glcm, 'contrast'),
                    'energy': graycoprops(glcm, 'energy'),
                    'homogeneity': graycoprops(glcm, 'homogeneity'),
                    'ASM': graycoprops(glcm, 'ASM')
-                   }
-        new_row_df = pd.DataFrame.from_dict(new_row, orient='index')  # create data frame from dictionary
-        data = pd.concat([data, new_row_df])       # add new results data frame to other
+                   })
+        new_row_df = pd.DataFrame(new_row)  # create data frame from dictionary
+        data = pd.concat([data, new_row.to_frame().T], ignore_index=True)       # add new results data frame to other
 
 data.to_csv('data.csv')     # save results to .csv file
 print('done')
