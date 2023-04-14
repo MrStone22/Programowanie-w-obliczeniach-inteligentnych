@@ -32,7 +32,7 @@ for texture_folder in os.listdir(textures_dir_name):                        # li
                    'ASM': graycoprops(glcm, 'ASM')
                    }
         new_row_df = pd.DataFrame.from_dict(new_row, orient='index')  # create data frame from dictionary
-        data = pd.concat([data, new_row_df], ignore_index=True)       # add new results data frame to other
+        data = pd.concat([data, new_row_df])       # add new results data frame to other
 
 data.to_csv('data.csv')     # save results to .csv file
 print('done')
