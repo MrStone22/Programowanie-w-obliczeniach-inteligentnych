@@ -35,25 +35,4 @@ for texture_folder in os.listdir(textures_dir_name):                        # li
         data = pd.concat([data, new_row_df], ignore_index=True)       # add new results data frame to other
 
 data.to_csv('data.csv')     # save results to .csv file
-
-
-# TODO: napisać skrypt wczytujący próbki tekstury i wyznaczający dla nich cechy tekstury na
-# podstawie modelu macierzy zdarzeń (ang. grey-level co-occurrence matrix) za pomocą
-# odpowiednich funkcji z pakietu scikit-image. Przed obliczeniem cech, każdy obraz przekształcić
-# do skali szarości oraz zmniejszyć głębię jasności do 5 bitów (64 poziomy). Wyznaczyć
-# następujące cechy:
-# a. dissimilarity, correlation, contrast, energy, homogeneity, ASM.
-# b. Przyjąć 3 odległości pikseli: 1, 3, 5
-# c. oraz 4 kierunki: 0, 45, 90 I 135 stopni (zakładamy symetrię kierunków).
-# d. Każdy wektor cech uzupełnić o nazwę kategorii tekstury
-
-# TODO: Zapisać zbiór wektorów danych do pliku csv. Można wykorzystać pakiet Pandas
-
-# TODO: Napisać skrypt do klasyfikacji wektorów cech z wykorzystaniem dowolnego algorytmu
-# klasyfikacji danych dostępnego w pakiecie scikit-learn (np. support vector machines
-# https://www.youtube.com/watch?v=efR1C6CvhmE&t=355s , K nearest
-# neighbors). Uczenie przeprowadzić dla wyodrębnionego zbioru treningowego, a testowanie dla
-# zbioru testowego. Obliczyć i wyświetlić na ekranie wyznaczoną dokładność klasyfikatora
-
-#img = io.imread(img_dir)           # load photo # TODO: ładuje zdjęcie w skali szarości: as_gray = True
-#img = io.imread(img_dir)  # show photo
+print('done')
