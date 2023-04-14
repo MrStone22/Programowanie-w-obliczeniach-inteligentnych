@@ -1,3 +1,4 @@
 *.xyz
 *.csv
-/textures
+Lab3/textures
+/__pycache__
