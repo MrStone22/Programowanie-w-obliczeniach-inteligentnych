@@ -35,4 +35,5 @@ for texture_folder in os.listdir(textures_dir_name):                        # li
         data = pd.concat([data, new_row.to_frame().T], ignore_index=True)       # add new results data frame to other
 
 data.to_csv('data.csv')     # save results to .csv file
+data.to_pickle('data.pkl')  # save results to .pkl file
 print('done')

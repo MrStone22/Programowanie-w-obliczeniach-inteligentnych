@@ -1,40 +1,40 @@
-import os
 import numpy as np
 import pandas as pd
-from PIL import Image
-from skimage.feature import graycomatrix, graycoprops
-import random
-from matplotlib import pyplot as plt
 from sklearn import svm
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
 
-data = pd.read_csv('data.csv')  # read data from csv file
-texture_types = data['category'].unique()
+features = []
+labels = []
+properties_from_file = ['dissimilarity', 'correlation', 'contrast', 'energy', 'homogeneity', 'ASM']
 
+pkl_file = pd.read_pickle('data.pkl')       # read features from .pkl file
+textures = pkl_file['category'].unique()    # extraction of unique values
 
-# A # cancer.data  table
-# B # cancer.target table in table
+# rewriting data from pickle to tables: features and labels
+for texture in textures:
+    # select only this rows when there is a current texture name in the category column
+    name = pkl_file[pkl_file['category'] == texture]
+    # save properties from selected rows
+    properties = name[properties_from_file]
 
-# Split dataset into training set and test set
-X_train, X_test, y_train, y_test = train_test_split(A, B, test_size=0.3, random_state=109) # 70% training and 30% test
+    for i in properties.values:
+        labels.append(texture)          # save texture name for each sample in labels table
+        stacked = np.hstack(i)          # stack arrays horizontally to make a single array [1,2] [3,4] -> [1,2,3,4]
+        flatten = stacked.flatten()     # create array collapsed into one dimension
+        features.append(flatten)        # save flatten table to features
 
-# Create a svm Classifier
-clf = svm.SVC(kernel='linear') # Linear Kernel
+# split dataset into training set and test set
+x_train, x_test, y_train, y_test = train_test_split(features, labels)
 
-# Train the model using the training sets
-clf.fit(X_train, y_train)
+# create a svm Classifier
+clf = svm.SVC(kernel='linear')
 
+# train the model using the training sets
+clf.fit(x_train, y_train)
 
-# Predict the response for test dataset
-y_pred = clf.predict(X_test)
+# predict the response for test dataset
+y_pred = clf.predict(x_test)
 
-# Model Accuracy: how often is the classifier correct?
-print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
-
-# TODO: Napisać skrypt do klasyfikacji wektorów cech z wykorzystaniem dowolnego algorytmu
-# klasyfikacji danych dostępnego w pakiecie scikit-learn (np. support vector machines
-# https://www.youtube.com/watch?v=efR1C6CvhmE&t=355s , K nearest
-# neighbors). Uczenie przeprowadzić dla wyodrębnionego zbioru treningowego,
-# a testowanie dla  zbioru testowego.
-# #Obliczyć i wyświetlić na ekranie wyznaczoną dokładność klasyfikatora
+# model accuracy: how often is the classifier correct?
+print('Accuracy:', round(metrics.accuracy_score(y_test, y_pred) * 100, 2), '%')
