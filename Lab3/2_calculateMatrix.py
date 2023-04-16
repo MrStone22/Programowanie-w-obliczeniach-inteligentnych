@@ -17,20 +17,20 @@ for texture_folder in os.listdir(textures_dir_name):                        # li
         sample = Image.open(sample_path)
         sample_gray = sample.convert('L')                                    # convert image sample to B-W image
         sample_gray_reduced = sample_gray.point(lambda x: int(x / 4))        # reduce the brightness depth to 5 bits
-        sample_gray_array = np.array(sample_gray_reduced)                      # create array from B-W image
+        sample_gray_array = np.array(sample_gray_reduced)                    # create array from B-W image
 
         # calculate the gray-level co-occurrence matrix
         glcm = graycomatrix(sample_gray_array, distances=pixel_distances, angles=angles, levels=64, symmetric=True)
 
         # create dictionary with calculated dissimilarity, correlation, contrast, energy, homogeneity, ASM
         new_row = pd.Series({'category': texture_folder,
-                   'dissimilarity': graycoprops(glcm, 'dissimilarity'),
-                   'correlation': graycoprops(glcm, 'correlation'),
-                   'contrast': graycoprops(glcm, 'contrast'),
-                   'energy': graycoprops(glcm, 'energy'),
-                   'homogeneity': graycoprops(glcm, 'homogeneity'),
-                   'ASM': graycoprops(glcm, 'ASM')
-                   })
+                             'dissimilarity': graycoprops(glcm, 'dissimilarity'),
+                             'correlation': graycoprops(glcm, 'correlation'),
+                             'contrast': graycoprops(glcm, 'contrast'),
+                             'energy': graycoprops(glcm, 'energy'),
+                             'homogeneity': graycoprops(glcm, 'homogeneity'),
+                             'ASM': graycoprops(glcm, 'ASM')
+                             })
         new_row_df = pd.DataFrame(new_row)  # create data frame from dictionary
         data = pd.concat([data, new_row.to_frame().T], ignore_index=True)       # add new results data frame to other
 

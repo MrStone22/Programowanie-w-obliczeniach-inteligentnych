@@ -1,4 +1,5 @@
 *.xyz
 *.csv
+*.pkl
 Lab3/textures
 /__pycache__

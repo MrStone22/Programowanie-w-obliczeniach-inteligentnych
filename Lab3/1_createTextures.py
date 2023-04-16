@@ -22,6 +22,6 @@ for photo_name in os.listdir(photos_dir_name):
     for x in range(num_of_x_cut):
         for y in range(num_of_y_cut):
             texture_name = photo_name_without_JPEG + str(x) + '_' + str(y) + '.jpg'     # create name for texture sample
-            cropped_image = photo.crop((y * cut_size, x * cut_size, (y + 1) * cut_size, (x + 1) * cut_size))
+            cropped_image = photo.crop((x * cut_size, y * cut_size, (x + 1) * cut_size, (y + 1) * cut_size))
             path = os.path.join(textures_dir_name, photo_name_without_JPEG, texture_name)  # create path to photo
             cropped_image.save(path)                                                       # save cropped photo
